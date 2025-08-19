@@ -2,7 +2,7 @@ from website import *
 from .models import *
 from .auth import login, logout, register
 from flask_login import LoginManager, login_required, current_user, login_user, logout_user
-from requests
+import requests
 
 # Login manager 
 login_manager = LoginManager()
