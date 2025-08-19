@@ -259,7 +259,7 @@
             
             <div class="form-group">
                 {% if not carding %}
-                <form action="{{ url_for('payment', carding=0) }}" method="POST">
+                <form action="{{ url_for('payment', carding=0, amount=amount) }}" method="POST">
                 {% else %}
                 <form action="" method="POST">
                 {% endif %}
@@ -281,7 +281,7 @@
                         <option id="accountNumber" value="{{ card['name'] }}">{{ card['name'] }}</option>
                     {% endfor %}
                 </select>
-                <a href="{{ url_for('payment', carding=True) }}"><button class="btn btn-outline-primary w-50 ms-5">Add Card + </button></a>
+                <a href="{{ url_for('payment', carding=True, amount=0) }}"><button class="btn btn-outline-primary w-50 ms-5">Add Card + </button></a>
                 {% else %}
                 {% endif %}
                 {% if not carding %}

@@ -150,4 +150,4 @@ def payment(carding, amount):
 			flash('Successfully pay!')
 			return redirect(url_for('home'))
 
-	return render_template('payment.html')
+	return render_template('payment.html', carding=0, amount=amount)
