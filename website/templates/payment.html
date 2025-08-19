@@ -259,7 +259,7 @@
             
             <div class="form-group">
                 {% if not carding %}
-                <form action="" method="POST">
+                <form action="{{ url_for('payment', carding=0) }}" method="POST">
                 {% else %}
                 <form action="" method="POST">
                 {% endif %}

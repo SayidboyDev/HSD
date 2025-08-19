@@ -2,12 +2,14 @@ from website import *
 from .models import *
 from .auth import login, logout, register
 from flask_login import LoginManager, login_required, current_user, login_user, logout_user
+from requests
 
 # Login manager 
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login_func'
 
+bank_api = 'http://127.0.0.1:2020/'
 
 @login_manager.user_loader
 def user_load(id):
@@ -124,9 +126,28 @@ def logout_func():
 	return redirect(url_for('login_func'))
 
 
-@app.route('/payment/<carding>')
-def payment(carding):
+@app.route('/payment/<carding>/<int:amount>', methods=['POST', 'GET'])
+def payment(carding, amount):
 	if carding == '1':
 		return render_template('payment.html', carding=True)
 	
+	if request.method == 'POST':
+		account_number = request.form.get('account_number')
+		company_own_account_number = HSBankAccount.query.first().account_number
+		
+		data = {
+			'account_number': account_number, 
+		  	'company_account_number': company_own_account_number, 
+			'amount': amount
+		}
+
+		response = requests.post(bank_api + 'api/payment', data=data)
+
+		if not response:
+			flash('There\'s an error occured! maybe your money gonee! sorry!')
+			return redirect(url_for('payment'))
+		else:
+			flash('Successfully pay!')
+			return redirect(url_for('home'))
+
 	return render_template('payment.html')
