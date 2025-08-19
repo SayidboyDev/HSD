@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Doemins</title>
+{% endblock %}
+
+{% block content %}
+	<h1>Doemin Selling Service</h1>
+
+	<div class="container d-flex">
+	<form action="{{ url_for('domein_selling') }}" method="POST">
+		<label class="d-block"><b>Search Domeins</b></label>
+		<input class="m-4" type="text" name="domein_name"><button class='btn btn-success'>Search</button>
+		<select name="subdomein" class="d-flex container-fluid ms-3">
+			<option value="all">all</option>
+			{% for s in subdomeins %}
+				<option value="{{ s.name }}">{{ s.name }} | ${{ s.price }}</option>
+			{% endfor %}
+		</select>
+	</form>
+	</div>
+
+	<div class="container">
+		
+		{% if result %}
+			{% if result and list %}
+				{% for res in result.items() %}
+					{% if res[1] == 'available' %}
+					<div class="d-block container m-3">
+						<b class="m-3" style="color: green; padding: 14px; padding-right: 90px; border: 1px solid #999; border-radius: 12px;">{{ res[0] }}</b> <button class='btn btn-outline-success'>Buy</button>
+					</div>
+					{% else %}
+					<div class="d-block container m-3">
+						<b class="m-3" style="color: red; padding: 14px; padding-right: 90px; border: 1px solid #999; border-radius: 12px;">{{ res[0] }} (not available)</b> <button class='btn btn-outline-success'>Buy from owner</button>
+					</div>
+					{% endif %}
+				{% endfor %}
+			{% else %}
+				{% if result['type'] == 'available' %}
+					<p class="container-fluid w-40 m-3" style="padding: 18px; border-radius: 14px; border: 1px solid #444;">{{ result['domein_name'] }} available. Price: {{ result['price'] }}$</p> <a href="{{ url_for('payment', carding=0) }}"><button class="btn btn-success m-2">Buy</button></a>
+				{% else %}
+					<p class="container-fluid w-40 m-3" style="padding: 18px; border-radius: 14px; border: 1px solid #444;">{{ result['domein_name'] }} already taken</p> <button class="btn btn-success m-2">Buy from owner</button>
+				{% endif %}
+			{% endif %}
+		{% endif %}
+		
+	</div>
+
+{% endblock %}

@@ -1,0 +1,98 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+.navbar {
+	background-color: #7291;
+	padding: 16px;
+}
+
+.navbar ul {
+	display: flex;
+	align-items: center;
+}
+
+.navbar ul li {
+	list-style: none;
+	margin-left: 17px; 
+}
+
+.navbar ul li a {
+	text-decoration: none;
+	color: #542;
+}
+
+#services {
+    background-color: white;
+}
+
+.service-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.service-item {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.service-item h3 {
+    color: #007bff;
+}
+
+.a-killer{
+	text-decoration: none;
+	color: #732;
+}
+
+.footer {
+	position: absolute;
+	right: 0;
+	background-color: #888;
+	padding: 13px;
+	width: 100%;
+}
+
+.footer p {
+	color: #222;
+	font-family: sans-serif;
+	text-align: center;
+}
+
+.footer .footer-links {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: right;
+}
+
+.footer .footer-links li {
+	margin-top: 15px;
+	list-style: none;
+	color: #666;
+	font-size: 12px;
+	/*font-weight: 700;*/
+}
+
+
+.footer .footer-links li:hover {
+	color: #444;
+	font-size: 13px;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+
+.footer .footer-links li a {
+	text-decoration: none;
+	color: #542;
+}
