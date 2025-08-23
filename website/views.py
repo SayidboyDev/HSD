@@ -78,6 +78,13 @@ def domein_selling():
 	return render_template('domein_selling.html', subdomeins=subdomeins)
 
 
+@app.route('/buy/<int:id>/<int:amount>')
+def buy(amount: int, id: int):
+	session['domein_price'] = amount
+
+	return redirect(url_for('payment', carding=True, ))
+
+
 @app.route('/pricing')
 def pricing(show_lower: bool=None):
 	pricing = Pricing.query.all()
@@ -126,8 +133,8 @@ def logout_func():
 	return redirect(url_for('login_func'))
 
 
-@app.route('/payment/<carding>/<int:amount>', methods=['POST', 'GET'])
-def payment(carding, amount):
+@app.route('/payment/<carding>', methods=['POST', 'GET'])
+def payment(carding):
 	if carding == '1':
 		return render_template('payment.html', carding=True)
 	
@@ -138,16 +145,16 @@ def payment(carding, amount):
 		data = {
 			'account_number': account_number, 
 		  	'company_account_number': company_own_account_number, 
-			'amount': amount
+			'amount': session['domein_price']
 		}
 
 		response = requests.post(bank_api + 'api/payment', data=data)
 
 		if not response:
 			flash('There\'s an error occured! maybe your money gonee! sorry!')
-			return redirect(url_for('payment'))
+			return redirect(url_for('payment', carding=0))
 		else:
 			flash('Successfully pay!')
 			return redirect(url_for('home'))
 
-	return render_template('payment.html', carding=0, amount=amount)
+	return render_template('payment.html', carding=0, amount=session['domein_price'])
