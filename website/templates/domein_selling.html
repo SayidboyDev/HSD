@@ -37,7 +37,7 @@
 				{% endfor %}
 			{% else %}
 				{% if result['type'] == 'available' %}
-					<p class="container-fluid w-40 m-3" style="padding: 18px; border-radius: 14px; border: 1px solid #444;">{{ result['domein_name'] }} available. Price: {{ result['price'] }}$</p> <a href="{{ url_for('payment', carding=0, amount=result['price']) }}"><button class="btn btn-success m-2">Buy</button></a>
+					<p class="container-fluid w-40 m-3" style="padding: 18px; border-radius: 14px; border: 1px solid #444;">{{ result['domein_name'] }} available. Price: {{ result['price'] }}$</p> <a href="{{ url_for('buy', id=1, amount=result['price']) }}"><button class="btn btn-success m-2">Buy</button></a>
 				{% else %}
 					<p class="container-fluid w-40 m-3" style="padding: 18px; border-radius: 14px; border: 1px solid #444;">{{ result['domein_name'] }} already taken</p> <button class="btn btn-success m-2">Buy from owner</button>
 				{% endif %}

@@ -82,7 +82,7 @@ def domein_selling():
 def buy(amount: int, id: int):
 	session['domein_price'] = amount
 
-	return redirect(url_for('payment', carding=True, ))
+	return redirect(url_for('payment', carding=True))
 
 
 @app.route('/pricing')
