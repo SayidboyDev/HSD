@@ -63,7 +63,8 @@ def domein_selling():
 
 		if check:
 			result = {'domein_name': f'{domein_name}{subdomein}',
-						'type': 'not available'
+						'type': 'not available',
+						'owner_id': check.user_id
 					}
 		elif not check:
 			result = {'domein_name': f'{domein_name}{subdomein}', 
@@ -158,3 +159,11 @@ def payment(carding):
 			return redirect(url_for('home'))
 
 	return render_template('payment.html', carding=0, amount=session['domein_price'])
+
+
+
+@app.route('/messenger/HSD/<int:user_id>')
+def messenger(user_id):
+	user = User.query.get(user_id)
+	return render_template('messenger_user_interface.html', user=user)
+

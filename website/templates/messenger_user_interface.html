@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Messenger | {{ user['username'] }}</title>
+{% endblock %}
+
+{% block content %}
+
+    <h2>Messenger</h2>
+    <h3>{{ user['username'] }}</h3>
+
+    <div class="chat">
+        <p>host</p>
+    </div>
+
+    <form>
+        <input type="text" maxlength="200" name="msg">
+
+        <button>Send</button>
+    </form>
+
+{% endblock %}
