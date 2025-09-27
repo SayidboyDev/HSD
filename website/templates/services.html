@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Services</title>
+{% endblock %}
+
+{% block content %}
+	<h2> Our Services</h2>
+
+    <section id="services">
+        <div class="service-grid">
+            {% for service in services %}
+              <div class="service-item">
+                <h3>{{service.title}}</h3>
+                <p>{{service.content}}</p>
+                {% if service.id == 1 %}
+                    <a href="/domein/sell"><button class="btn btn-primary">Get Started</button></a>
+                {% elif service.id == 2 %}
+                    <a href="/hosting"><button class="btn btn-primary">Get Started</button></a>
+                {% else %}
+                    <a class="a-killer" href="/build/apps"><button class="btn btn-primary">Get Started</button></a>
+                {% endif %}
+              </div>
+            {% endfor %}
+        </div>
+    </section>
+
+	<ul class="feature-list">
+        <li>Arzon narxlar va moslashuvchan paketlar</li>
+        <li>Tez va ishonchli xizmat ko'rsatish</li>
+        <li>24/7 mijozlar yordami</li>
+        <li>Yangilanishlar va texnik yordam bepul</li>
+        <li>Xavfsizlik va ma'lumotlar himoyasi</li>
+        <li>Oson boshqaruv paneli</li>
+    </ul>
+{% endblock %}

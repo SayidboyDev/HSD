@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Chats</title>
+{% endblock %}
+
+
+{% block content %}
+    {% for chat in chats %}
+        <a href="/messenger/chat/{{ chat.id }}">{{ chat.id }}</a>
+    {% endfor %}
+{% endblock %}

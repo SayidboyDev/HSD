@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Messenger</title>
+{% endblock %}
+
+{% block content %}
+	<h2>Messenger</h2>
+	<br>
+
+	<hr>
+
+	<h4 align="center"></h4>
+
+	<div class="content">
+		<section class="messages m-5">
+			{% if messeges %}
+
+				{% for msg in messeges %}
+					{% if msg.owner_id == current_user.id %}
+						<div class="right-messeges">
+							{{ msg.content }}
+						</div>
+					{% else %}
+						<div class="left-messeges">
+							{{msg.content }}
+						</div>
+					{% endif %}
+				{% endfor %}
+
+			{% endif %}
+		</section>
+	</div>
+
+	<div class="input-message">
+
+		<form action="{{ url_for('chat', chat_id=chat.id) }}" method='POST'>
+			<input type="text" name="msg" size="15">
+			<button class="btn btn-primary" type="submit">>>></button>
+		</form>
+
+	</div>
+
+{% endblock %}
