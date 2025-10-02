@@ -133,9 +133,9 @@ def logout_func():
 @app.route('/profile')
 def profile():
 	user = User.query.filter_by(id = current_user.id)
-	chats = Chat.query.filter(Chat.first_member_id == current_user.id or Chat.second_member_id == current_user.id).all()
+	#chats = Chat.query.filter(Chat.first_member_id == current_user.id or Chat.second_member_id == current_user.id).all()
 
-	return render_template('profile.html', user=user, chats=chats)
+	return render_template('profile.html', user=user)
 
 @app.route('/profile/chats')
 def profile_chats():
@@ -232,31 +232,32 @@ def messenger(user_id):
 	return render_template('messenger.html', user=user, messeges=messeges)
 
 
-@app.route('/messenger/chat/<int:chat_id>', methods=['POST', "GET"])
-def chat(chat_id):
-	chat = Chat.query.get(chat_id)
-	messeges = Messege.query.filter(Messege.owner_id == chat.first_member_id or Messege.owner_id == chat.second_member_id or Messege.send_user_id == chat.first_member_id or Messege.send_user_id == chat.second_member_id).all()
+# this is not gonna be work on this version sorry :(
+# @app.route('/messenger/chat/<int:chat_id>', methods=['POST', "GET"])
+# def chat(chat_id):
+# 	chat = Chat.query.get(chat_id)
+# 	messeges = Messege.query.filter(Messege.owner_id == chat.first_member_id or Messege.owner_id == chat.second_member_id or Messege.send_user_id == chat.first_member_id or Messege.send_user_id == chat.second_member_id).all()
 
-	if request.method == 'POST':
-		msg = request.form.get('msg').strip()
-		owner_id = current_user.id
+# 	if request.method == 'POST':
+# 		msg = request.form.get('msg').strip()
+# 		owner_id = current_user.id
 
-		if not msg:
-			flash('Please complete the input and then send!')
-			return redirect(url_for('messenger', user_id=chat.second_user_id))
+# 		if not msg:
+# 			flash('Please complete the input and then send!')
+# 			return redirect(url_for('messenger', user_id=chat.second_user_id))
 
-		new_msg = Messege(
-			owner_id = owner_id,
-			content = msg,
-			send_user_id = chat.second_member_id,
-			chat_id = chat.id
-		)
+# 		new_msg = Messege(
+# 			owner_id = owner_id,
+# 			content = msg,
+# 			send_user_id = chat.second_member_id,
+# 			chat_id = chat.id
+# 		)
 		
 
-		db.session.add(new_msg)
-		db.session.commit()
+# 		db.session.add(new_msg)
+# 		db.session.commit()
 
-		return redirect(url_for('chat', chat_id=chat.id))
+# 		return redirect(url_for('chat', chat_id=chat.id))
 
-	return render_template('messenger.html', messeges=messeges, chat=chat)
+# 	return render_template('messenger.html', messeges=messeges, chat=chat)
 
